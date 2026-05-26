@@ -5,33 +5,34 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Crown, Sparkles, EyeOff, Flame, ShieldAlert, CreditCard, Check, X, ShieldCheck } from 'lucide-react';
-import { BoostProduct } from '../types';
-import { BOOST_PRODUCTS } from '../data';
+import { Crown, Sparkles, Shield, Volume2, CreditCard, Check, X, ShieldCheck, Flame, Zap } from 'lucide-react';
+import { BroShopItem } from '../types';
+import { BRO_SHOP_ITEMS } from '../data';
 
 interface BoostPageProps {
   onUnlockSuccessfully: (productName: string) => void;
 }
 
 export default function BoostPage({ onUnlockSuccessfully }: BoostPageProps) {
-  const [selectedProduct, setSelectedProduct] = useState<BoostProduct | null>(null);
+  const [selectedProduct, setSelectedProduct] = useState<BroShopItem | null>(null);
   const [showCheckout, setShowCheckout] = useState(false);
   const [purchaseSuccess, setPurchaseSuccess] = useState(false);
   
-  // Checkout form dummy state
+  // Checkout custom input state
   const [cardNumber, setCardNumber] = useState('');
   const [cardHolder, setCardHolder] = useState('');
   const [expiry, setExpiry] = useState('');
   const [cvv, setCvv] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
 
-  const handleSelectProduct = (product: BoostProduct) => {
+  const handleSelectProduct = (product: BroShopItem) => {
     setSelectedProduct(product);
     setShowCheckout(true);
     setCardNumber('');
     setCardHolder('');
     setExpiry('');
     setCvv('');
+    setPurchaseSuccess(false);
   };
 
   const handleProcessCheckout = (e: React.FormEvent) => {
@@ -40,12 +41,12 @@ export default function BoostPage({ onUnlockSuccessfully }: BoostPageProps) {
 
     setIsProcessing(true);
 
-    // Simulate luxury transaction clearance delay
+    // Simulate high-speed premium transaction gate
     setTimeout(() => {
       setIsProcessing(false);
       setPurchaseSuccess(true);
       onUnlockSuccessfully(selectedProduct.name);
-    }, 1500);
+    }, 1400);
   };
 
   const handleCloseSuccess = () => {
@@ -54,91 +55,92 @@ export default function BoostPage({ onUnlockSuccessfully }: BoostPageProps) {
     setSelectedProduct(null);
   };
 
-  // Helper to map icons
   const getProductIcon = (iconName: string) => {
-    const props = { className: 'w-6 h-6' };
     switch (iconName) {
-      case 'Crown': return <Crown {...props} className="w-6 h-6 text-amber-400" />;
-      case 'Sparkles': return <Sparkles {...props} className="w-6 h-6 text-pink-400 animate-pulse" />;
-      case 'EyeOff': return <EyeOff {...props} className="w-6 h-6 text-purple-400" />;
-      case 'ShieldAlert': return <ShieldAlert {...props} className="w-6 h-6 text-[#FB7185]" />;
-      default: return <Crown {...props} />;
+      case 'Shield':
+        return <Shield className="w-5 h-5 text-sky-400" />;
+      case 'Crown':
+        return <Crown className="w-5 h-5 text-amber-400" />;
+      case 'Volume2':
+        return <Volume2 className="w-5 h-5 text-rose-450" />;
+      default:
+        return <Sparkles className="w-5 h-5 text-purple-400" />;
     }
   };
 
   return (
-    <div className="w-full max-w-4xl px-4 py-8 mx-auto pb-24 text-left">
+    <div className="w-full max-w-4xl px-4 py-8 mx-auto pb-32 text-left">
       
-      {/* Decorative Title */}
+      {/* Dynamic Title */}
       <div className="text-center mb-12">
-        <div className="inline-flex items-center gap-1.5 bg-[#FACC15]/10 border border-[#FACC15]/20 px-3.5 py-1 rounded-full mb-3 shadow-xs">
-          <Sparkles className="w-4 h-4 text-[#FACC15] animate-spin-slow" />
-          <span className="font-mono text-[9px] text-[#FACC15] tracking-wider uppercase font-extrabold">
-            High Nobility Store • متجر النخبة
+        <div className="inline-flex items-center gap-1.5 bg-yellow-400/10 border border-yellow-400/20 px-3.5 py-1.5 rounded-full mb-3 shadow-sm">
+          <Sparkles className="w-4 h-4 text-yellow-400 animate-pulse" />
+          <span className="font-mono text-[9px] text-yellow-300 tracking-wider uppercase font-black">
+            BroCard Elite Vault • متجر النخبة
           </span>
         </div>
-        <h2 className="text-3xl font-extrabold text-slate-100 tracking-tight font-sans">
-          Acquire Spectral Unlocks
+        <h2 className="text-3xl sm:text-4xl font-display font-black italic text-slate-100 tracking-tight">
+          Monetization Vault Upgrades
         </h2>
-        <p className="text-xs text-[#B6A8D6] max-w-sm mx-auto mt-2 leading-relaxed text-balance">
-          Bypass encryption, acquire spectral phantom secrecy, or pin your Admirer status to the pinnacle royal throne.
+        <p className="text-xs text-slate-300 max-w-md mx-auto mt-2 leading-relaxed">
+          Bypass failure checkpoint dares with Shield protection, or upgrade your shaming cards to legendary glowing skins to blow up on stories!
         </p>
       </div>
 
-      {/* Grid of Elite products */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {BOOST_PRODUCTS.map((prod) => {
-          const isVip = prod.id === 'bp-crown';
+      {/* Grid of Products */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {BRO_SHOP_ITEMS.map((prod) => {
           return (
             <div
-              id={`product-card-${prod.id}`}
               key={prod.id}
-              className={`p-6 bg-gradient-to-b from-[#1C1032] to-[#120822] rounded-3xl relative overflow-hidden transition-all duration-350 flex flex-col justify-between h-72 border group ${
-                isVip 
-                  ? 'border-amber-500/35 hover:border-amber-500/50 shadow-[0_5px_20px_rgba(250,204,21,0.06)]' 
-                  : 'border-purple-500/15 hover:border-purple-500/35'
+              className={`p-6 bg-gradient-to-b from-[#1C1032] to-[#120822] border rounded-3xl relative overflow-hidden transition-all duration-300 flex flex-col justify-between min-h-[300px] hover:scale-102 group ${
+                prod.id === 'bs-royalty' 
+                  ? 'border-yellow-550 shadow-md shadow-yellow-500/5' 
+                  : 'border-purple-500/15'
               }`}
             >
-              {/* Highlight backdrop */}
-              <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/5 rounded-full blur-2xl pointer-events-none group-hover:scale-110 transition-transform" />
+              {/* Highlight background radial */}
+              <div className="absolute top-0 right-0 w-28 h-28 bg-[#A78BFA]/5 rounded-full blur-2xl pointer-events-none" />
 
               <div>
-                {/* Header info */}
+                {/* Product Header */}
                 <div className="flex justify-between items-start mb-4">
-                  <div className="h-11 w-11 rounded-xl bg-purple-950/45 border border-purple-500/20 flex items-center justify-center">
+                  <div className="h-10 w-10 rounded-xl bg-purple-950/50 border border-purple-550/20 flex items-center justify-center">
                     {getProductIcon(prod.iconName)}
                   </div>
-                  <span className="font-mono text-[9px] text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded-sm uppercase tracking-wider font-extrabold border border-amber-500/20">
+                  <span className="text-[8.5px] font-mono tracking-widest bg-yellow-400/10 text-yellow-300 border border-yellow-400/25 px-2 py-0.5 rounded font-black">
                     {prod.badge}
                   </span>
                 </div>
 
-                {/* Title */}
-                <h4 className="text-base font-extrabold text-slate-100 font-sans flex items-center gap-2">
-                  {prod.name}
-                  <span className="text-[11px] text-purple-300 font-mono font-bold bg-purple-500/10 px-2 py-0.5 rounded-sm">
+                <h4 className="text-sm font-black text-white font-sans flex flex-col gap-1">
+                  <span>{prod.name}</span>
+                  <span className="text-[10px] text-purple-300 font-mono font-bold font-sans">
                     {prod.arabicName}
                   </span>
                 </h4>
-                
-                <p className="text-xs text-[#D6C7FF]/70 mt-2 leading-normal">
+
+                <p className="text-[11.5px] text-slate-350 mt-2.5 leading-relaxed">
                   {prod.description}
+                </p>
+
+                <p className="text-[10px] text-emerald-400 font-mono mt-3 leading-none italic">
+                  ✓ {prod.benefit}
                 </p>
               </div>
 
-              {/* Price and Action row */}
-              <div className="border-t border-purple-500/10 pt-4 flex justify-between items-center mt-4 bg-purple-950/15 p-3 rounded-xl">
+              {/* Bottom Price buy block */}
+              <div className="pt-4 mt-6 border-t border-purple-550/10 flex justify-between items-center">
                 <div>
-                  <span className="font-mono text-[10px] text-[#B6A8D6]/60 uppercase block leading-none">Prestige Value</span>
-                  <span className="text-lg font-black text-amber-400 font-mono block mt-1">
-                    {prod.priceSAR} SAR <span className="text-xs font-normal text-slate-200">/ ${prod.priceUSD}</span>
+                  <span className="text-[9px] font-mono uppercase text-slate-400 block leading-tight">Price Tag</span>
+                  <span className="text-base font-black text-yellow-300 font-mono block mt-1">
+                    {prod.priceSAR} SAR <span className="text-[10px] text-slate-400 block sm:inline">/ ${prod.priceUSD}</span>
                   </span>
                 </div>
-                
+
                 <button
-                  id={`buy-btn-${prod.id}`}
                   onClick={() => handleSelectProduct(prod)}
-                  className="px-4 py-2 bg-gradient-to-r from-purple-800 to-purple-600 hover:from-purple-700 hover:to-purple-500 text-slate-100 font-sans font-bold text-xs rounded-lg transition-all shadow-md cursor-pointer group-hover:scale-102"
+                  className="px-4 py-2 bg-gradient-to-r from-purple-800 to-purple-600 hover:brightness-110 text-white font-sans font-bold text-[11px] rounded-lg transition-all cursor-pointer shadow-md"
                 >
                   Acquire Now
                 </button>
@@ -149,7 +151,7 @@ export default function BoostPage({ onUnlockSuccessfully }: BoostPageProps) {
         })}
       </div>
 
-      {/* Simulated GCC Credit Card Checkout Modal Overlay */}
+      {/* SECURE MADA / APPLE PAY CHECKOUT FORM */}
       <AnimatePresence>
         {showCheckout && (
           <div className="fixed inset-0 bg-[#06030F]/90 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
@@ -157,92 +159,88 @@ export default function BoostPage({ onUnlockSuccessfully }: BoostPageProps) {
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="bg-[#1C1032] border border-purple-500/35 rounded-3xl w-full max-w-md overflow-hidden relative shadow-2xl"
+              className="bg-[#1C1032] border border-purple-550/35 rounded-3xl w-full max-w-md overflow-hidden relative shadow-2xl"
             >
               
-              {/* Close Button */}
+              {/* Close Cross */}
               <button
                 onClick={() => setShowCheckout(false)}
-                className="absolute top-4 right-4 p-2 text-[#B6A8D6] hover:text-slate-100 bg-[#120822] rounded-full hover:bg-[#20103E] transition-colors cursor-pointer"
+                className="absolute top-4 right-4 p-2 text-slate-400 hover:text-white bg-black/40 rounded-full transition-colors cursor-pointer"
               >
                 <X className="w-4 h-4" />
               </button>
 
-              {/* Purchase Success Overlay Screen */}
               {purchaseSuccess ? (
-                <div className="p-8 text-center flex flex-col items-center justify-center animate-fadeIn">
-                  <div className="h-16 w-16 rounded-full bg-emerald-500/10 border-2 border-emerald-400 animate-pulse flex items-center justify-center mb-5 text-emerald-400">
-                    <ShieldCheck className="w-8 h-8" />
+                <div className="p-8 text-center flex flex-col items-center justify-center">
+                  <div className="h-14 w-14 rounded-full bg-emerald-500/15 border-2 border-emerald-400 animate-pulse flex items-center justify-center mb-5 text-emerald-400 text-xl">
+                    ✓
                   </div>
                   
                   <span className="font-mono text-[9px] text-[#34D399] tracking-widest uppercase font-black bg-emerald-500/10 px-3 py-1 rounded-full border border-emerald-500/20">
                     TRANSACTION SETTLED • نجاح الدفع
                   </span>
 
-                  <h3 className="text-2xl font-sans font-extrabold text-slate-100 mt-5">
-                    Prestige Active!
+                  <h3 className="text-xl font-sans font-black text-slate-150 mt-5">
+                    Prestige Upgrade Active!
                   </h3>
                   
-                  <p className="text-xs text-[#D6C7FF]/75 max-w-xs mt-3 leading-linear">
-                    Thank you, your <span className="text-amber-400 font-extrabold">{selectedProduct?.name}</span> is cleared securely. Encryption parameters applied instantly to your tracking node.
+                  <p className="text-xs text-[#D6C7FF]/75 max-w-xs mt-2 leading-relaxed">
+                    Thank you, your <span className="text-amber-400 font-extrabold">{selectedProduct?.name}</span> is cleared securely. Simulated benefits have been applied directly to your gameplay session!
                   </p>
 
                   <button
                     onClick={handleCloseSuccess}
-                    className="mt-8 px-6 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-600 text-slate-100 rounded-xl font-bold font-sans text-xs uppercase cursor-pointer hover:brightness-110 shadow-md"
+                    className="mt-8 px-6 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-600 text-white rounded-xl font-bold font-sans text-xs uppercase cursor-pointer hover:brightness-110 shadow-md"
                   >
-                    Done • إتمام
+                    Close Secure Drawer • إغلاق
                   </button>
                 </div>
               ) : (
                 <form onSubmit={handleProcessCheckout} className="p-6">
-                  {/* Modal Header */}
                   <div className="mb-6">
-                    <span className="font-mono text-[9px] text-[#A78BFA] tracking-widest block uppercase">
-                      SECURE GCC SETTLEMENT GATEWAY
+                    <span className="font-mono text-[9px] text-[#A78BFA] tracking-widest block uppercase leading-none">
+                      SECURE CHECKOUT TERMINAL
                     </span>
-                    <h3 className="text-lg font-bold text-slate-100 mt-1">
+                    <h3 className="text-md font-extrabold text-white mt-1">
                       Clear: {selectedProduct?.name}
                     </h3>
-                    <p className="text-xs text-[#B6A8D6] font-mono mt-0.5">
-                      Merchant: MURAQIB INTEL (Riyadh, SA)
+                    <p className="text-[10px] text-[#B6A8D6] font-mono mt-0.5 uppercase">
+                      Merchant: BROCARD INTEL (Riyadh Gate, SA)
                     </p>
                   </div>
 
-                  {/* Pricing breakdown */}
+                  {/* Price breakdown block */}
                   <div className="bg-[#120822] p-3.5 rounded-xl border border-purple-500/10 mb-6 flex justify-between items-center text-xs font-mono">
-                    <span className="text-[#B6A8D6]/60 uppercase">Amount Due:</span>
-                    <span className="text-amber-400 font-extrabold text-sm">{selectedProduct?.priceSAR} SAR / ${selectedProduct?.priceUSD}</span>
+                    <span className="text-slate-400 uppercase">Amount Due:</span>
+                    <span className="text-yellow-300 font-extrabold text-sm">{selectedProduct?.priceSAR} SAR / ${selectedProduct?.priceUSD}</span>
                   </div>
 
-                  {/* Credit Card Inputs */}
+                  {/* Credit Card Inputs with Local GCC payment providers hints */}
                   <div className="space-y-4 text-left text-xs text-[#D6C7FF]">
                     
                     {/* Cardholder */}
                     <div>
-                      <label className="block font-mono font-bold uppercase tracking-wider mb-1.5 text-[#B6A8D6]">
-                        Sovereign Holder Name
+                      <label className="block font-mono font-bold uppercase tracking-wider mb-1 text-slate-350 text-[10px]">
+                        Cardholder Name
                       </label>
                       <input
-                        id="checkout-cardholder"
                         type="text"
                         required
                         value={cardHolder}
                         onChange={(e) => setCardHolder(e.target.value)}
-                        placeholder="e.g. BANDAR AL-SAUD"
+                        placeholder="e.g. FAHAD SULTAN AL-HARBI"
                         className="w-full bg-[#120822] border border-purple-500/20 rounded-xl px-4 py-2.5 text-xs text-slate-100 uppercase focus:outline-none focus:border-amber-400 font-mono"
                       />
                     </div>
 
                     {/* Card Number */}
                     <div>
-                      <label className="block font-mono font-bold uppercase tracking-wider mb-1.5 text-[#B6A8D6] flex justify-between">
+                      <label className="block font-mono font-bold uppercase tracking-wider mb-1 text-slate-350 text-[10px] flex justify-between">
                         <span>Card Number</span>
-                        <span className="text-[10px] text-pink-400/80">mada / Visa / Mastercard</span>
+                        <span className="text-[9px] text-pink-400 font-black">mada / Apple Pay</span>
                       </label>
                       <div className="relative">
                         <input
-                          id="checkout-cardnumber"
                           type="text"
                           required
                           maxLength={19}
@@ -251,20 +249,19 @@ export default function BoostPage({ onUnlockSuccessfully }: BoostPageProps) {
                           placeholder="4000 1234 5678 9010"
                           className="w-full bg-[#120822] border border-purple-500/20 rounded-xl pl-10 pr-4 py-2.5 text-xs text-slate-100 focus:outline-none focus:border-amber-400 font-mono"
                         />
-                        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#B6A8D6]/50">
-                          <CreditCard className="w-4 h-4" />
+                        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">
+                          <CreditCard className="w-3.5 h-3.5" />
                         </span>
                       </div>
                     </div>
 
-                    {/* Expiry & CVV */}
+                    {/* Expiry / CVV */}
                     <div className="grid grid-cols-2 gap-4">
                       <div>
-                        <label className="block font-mono font-bold uppercase tracking-wider mb-1.5 text-[#B6A8D6]">
+                        <label className="block font-mono font-bold uppercase tracking-wider mb-1 text-slate-350 text-[10px]">
                           Expiry Date
                         </label>
                         <input
-                          id="checkout-expiry"
                           type="text"
                           required
                           maxLength={5}
@@ -275,11 +272,10 @@ export default function BoostPage({ onUnlockSuccessfully }: BoostPageProps) {
                         />
                       </div>
                       <div>
-                        <label className="block font-mono font-bold uppercase tracking-wider mb-1.5 text-[#B6A8D6]">
+                        <label className="block font-mono font-bold uppercase tracking-wider mb-1 text-slate-350 text-[10px]">
                           CVV Security
                         </label>
                         <input
-                          id="checkout-cvv"
                           type="password"
                           required
                           maxLength={4}
@@ -293,28 +289,25 @@ export default function BoostPage({ onUnlockSuccessfully }: BoostPageProps) {
 
                   </div>
 
-                  {/* Submission and processor info */}
+                  {/* Clear action */}
                   <div className="mt-8 space-y-3">
                     <button
-                      id="checkout-submit-btn"
                       type="submit"
                       disabled={isProcessing}
-                      className="w-full py-3 bg-gradient-to-r from-amber-400 to-yellow-500 text-brand-surface font-sans font-black text-xs uppercase rounded-xl transition-all shadow-md flex items-center justify-center gap-2.5 cursor-pointer"
+                      className="w-full py-3 bg-gradient-to-r from-yellow-400 to-amber-500 text-zinc-950 font-sans font-black text-xs uppercase rounded-xl transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer"
                     >
                       {isProcessing ? (
                         <>
-                          <span className="h-3.5 w-3.5 rounded-full border-2 border-brand-surface border-t-transparent animate-spin inline-block" />
-                          <span>Clearing prestige authorization...</span>
+                          <span className="h-3.5 w-3.5 rounded-full border-2 border-zinc-950 border-t-transparent animate-spin" />
+                          <span>Authorizing transaction...</span>
                         </>
                       ) : (
-                        <>
-                          <span>Clear Transaction Securely • إتمام الدفع 🛡</span>
-                        </>
+                        <span>Simulate Secure Payment • إتمام الدفع</span>
                       )}
                     </button>
                     
-                    <span className="text-[9px] font-mono text-[#B6A8D6]/40 block text-center uppercase tracking-wider">
-                      PCI-DSS Layer 2 Encryption Clearance Certified
+                    <span className="text-[8px] font-mono text-slate-500 block text-center uppercase tracking-wider leading-none">
+                      PCI-DSS Layer 2 Encryption Clearances Checked
                     </span>
                   </div>
 

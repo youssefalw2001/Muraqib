@@ -3,20 +3,23 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Cinzel:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;700&family=Cairo:wght@300;400;500;600;700;900&family=Tajawal:wght@300;400;500;700;900&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --color-brand-bg: #0F0822;
-  --color-brand-surface: #1B102D;
-  --color-brand-elevated: #24143A;
+  --color-brand-bg: #0B0516;
+  --color-brand-surface: #140C24;
+  --color-brand-elevated: #1F1235;
   --color-brand-purple: #7C3AED;
   --color-brand-purple-light: #A78BFA;
-  --color-brand-gold: #FACC15;
+  --color-brand-gold: #D4AF37;
   --color-brand-rose: #FF75B5;
   
-  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --font-display: "Space Grotesk", sans-serif;
+  --font-sans: "Inter", "Cairo", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-arabic: "Cairo", "Tajawal", sans-serif;
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-cinzel: "Cinzel", serif;
+  --font-tech: "Space Grotesk", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
   
   --animate-pulse-slow: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
@@ -39,11 +42,15 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-body {
+html, body {
   background-color: #0F0822;
   color: #F8FAFC;
   font-family: var(--font-sans);
+  max-width: 100vw;
+  width: 100%;
   overflow-x: hidden;
+  position: relative;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Custom gorgeous scrollbar */

@@ -1,6 +1,6 @@
 {
-  "name": "Muraqib",
-  "description": "Premium GCC Social Intelligence Suite. Create your Social Radar, collect observer signals, and find your Crown Council.",
-  "requestFramePermissions": [],
+  "name": "Wafi: Ultimate Loyalty Duel",
+  "description": "Create luxurious loyalty challenges, configure specific stake level penalties, generate pixel-perfect story customizer cards, and test your friends' ultimate loyalty in clean dual-language English/Arabic.",
+  "requestFramePermissions": ["microphone"],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

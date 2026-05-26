@@ -3,38 +3,50 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-export type RadarMode = 'general' | 'crush' | 'unfinished' | 'signal_check';
+export type BroTheme = 'onyx' | 'royalCrimson' | 'cyberToxic' | 'riyadhGold';
 
-export interface Radar {
+export interface Question {
+  id: string;
+  text: string;
+  options: string[];
+  correctIdx: number;
+  difficulty: 'easy' | 'medium' | 'hard';
+  roastComment: string; // The funny message printed if they fail this specific question
+}
+
+export interface BroQuiz {
   id: string;
   displayName: string;
   slug: string;
-  city: string;
-  mode: RadarMode;
-  question: string;
-  options: string[];
+  theme: BroTheme;
+  questions: Question[];
+  rewardWinner: string;      // What they win if they pass all questions (e.g., "A steak dinner on me!")
+  dareLevel1: string;       // Small checkpoint fail (e.g., "Record a 10s video clucking like a chicken")
+  dareLevel2: string;       // Medium checkpoint fail (e.g., "Send an embarrassing voice note to the main chat")
+  dareLevel3: string;       // Critical checkpoint fail (e.g., "Send me $10 or Venmo a coffee right now")
+  voiceNoteDataUrl: string | null;  // User recorded roast message bytes as base64/dataURL
+  voiceNoteTemplateId: 'roast_clown' | 'bruh_disappointed' | 'busted_fraud' | 'none';
   createdAt: string;
 }
 
-export type ObserverStatus = 'Crown King' | 'Diamond Prince' | 'Golden Guard' | 'Elite Observer' | 'Masked Observer' | 'Standard Observer';
-
-export interface Observer {
+export interface ChallengerAttempt {
   id: string;
-  radarId: string;
-  handle: string;
-  isMasked: boolean;
-  answer: string;
-  msg?: string;
+  quizId: string;
+  challengerName: string;
+  score: number;
+  totalQuestions: number;
+  failedOnQuestionText: string | null;
+  failedLevel: 'level1' | 'level2' | 'level3' | 'none';
+  dareAssigned: string;
+  status: 'survived' | 'wimped_out' | 'dare_accepted' | 'immunity_used';
   city: string;
-  interestScore: number; // 0-100 score of attraction/curiosity
-  repeatSignals: number; // Visitor counter
-  activeAt: string;
+  timestamp: string;
+  avatarSeed: number;
+  excuseMsg?: string;
   deviceType: string;
-  status: ObserverStatus;
-  avatarSeed: number; // to generate consistent elegant avatar glow
 }
 
-export interface BoostProduct {
+export interface BroShopItem {
   id: string;
   name: string;
   arabicName: string;
@@ -44,7 +56,7 @@ export interface BoostProduct {
   badge: string;
   glowColor: string;
   benefit: string;
-  iconName: 'Crown' | 'Sparkles' | 'EyeOff' | 'Flame' | 'ShieldAlert';
+  iconName: 'Crown' | 'Shield' | 'Flame' | 'Sparkles' | 'Volume2';
 }
 
 export type AppView = 'landing' | 'create' | 'observer' | 'verdict' | 'dashboard' | 'council' | 'boost';

@@ -17,9 +17,9 @@ export default function RadarSweep({ activeCount = 12, pulseSpeed = 'normal', sh
   const points = [
     { x: '35%', y: '25%', size: 'h-2 w-2', label: 'saud.al', r: 90, delay: 0.2 },
     { x: '70%', y: '40%', size: 'h-1.5 w-1.5', label: 'dxb_99', r: 15, delay: 0.8 },
-    { x: '25%', y: '65%', size: 'h-3 w-3', label: '👤 MASKED', r: 60, delay: 1.4 },
+    { x: '25%', y: '65%', size: 'h-3 w-3', label: 'MASKED', r: 60, delay: 1.4 },
     { x: '55%', y: '75%', size: 'h-1 w-1', label: 'yasmin_q', r: 35, delay: 2.1 },
-    { x: '80%', y: '20%', size: 'h-2 w-2', label: '👤 MASKED', r: 75, delay: 2.7 },
+    { x: '80%', y: '20%', size: 'h-2 w-2', label: 'MASKED', r: 75, delay: 2.7 },
   ];
 
   return (
