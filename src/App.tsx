@@ -1,5 +1,5 @@
-import PremiumTrialApp from './PremiumTrialApp';
+import StudioTrialApp from './StudioTrialApp';
 
 export default function App() {
-  return <PremiumTrialApp />;
+  return <StudioTrialApp />;
 }
