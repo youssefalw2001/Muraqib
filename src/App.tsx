@@ -1,5 +1,5 @@
-import StudioTrialApp from './StudioTrialApp';
+import ArabGameApp from './ArabGameApp';
 
 export default function App() {
-  return <StudioTrialApp />;
+  return <ArabGameApp />;
 }
