@@ -1,59 +1,63 @@
-# Al-Muraqib Trials — The Observer
+# Diwan of Shadows — ديوان الظلال
 
-**Test your friends. Crown the real ones.**
+**Leave a whisper. Flip the card.**
 
-Al-Muraqib Trials is the gamified loyalty-trial mode inside the Al-Muraqib universe. A creator builds a personal challenge, shares a `/trial/:slug` link on Snapchat, Instagram, TikTok, or WhatsApp, and friends compete through a level ladder of personal questions.
+Diwan of Shadows is a mobile-first anonymous mystery-card social game for GCC/MENA audiences. Creators open a Diwan link, share a dark-gold sticker on Snapchat, Instagram, TikTok, or WhatsApp, and receive anonymous Shadow Cards from their circle.
 
-Winners enter the Crown Council. Failed challengers get a playful, shareable Roast Verdict.
+The owner flips cards inside the Shadow Hearth, reads whispers, and can spend Insight Tokens to unlock safe clues. Clues are voluntary, game-generated, or based on the sender's chosen deck/mood — not device tracking, contact matching, GPS, carrier lookup, or identity decryption.
 
-## Core loop
+## MVP flow
 
-1. Creator builds a Loyalty Trial.
-2. Creator sets personal questions, a winner reward, and custom voice-roast scripts.
-3. Creator shares the `/trial/:slug` link.
-4. Friend plays the Trial.
-5. Friend either survives into Crown Council or fails into a viral verdict.
-6. Result page pushes the challenger to create their own Trial.
+1. Creator generates a Diwan link such as `/d/latifa`.
+2. Creator generates a Snapchat-style sticker: “Leave a whisper in my Diwan... I'm flipping the cards tonight.”
+3. Visitor chooses a deck: Truth, Roast, or Secret Crush.
+4. Visitor types an anonymous whisper and may record a scrambled voice preview.
+5. Owner sees face-down obsidian cards in the Shadow Hearth.
+6. Owner taps to flip cards and reveal whispers.
+7. Locked clue slots can be revealed with Insight Tokens.
 
-## MVP screens
+## Current frontend features
 
-- Home / Landing
-- Create Trial
-- Public Trial at `/trial/:slug`
-- Viral Verdict
-- Intelligence Dashboard
-- Crown Council
-- Boost & Access
+- Luxury dark mobile-first interface
+- Creator setup and share sticker preview
+- Anonymous sender interface
+- Truth / Roast / Secret Crush deck selection
+- Native microphone recording with Web Audio distortion playback
+- Shadow Hearth card dashboard
+- 3D card flip reveal
+- Token balance and checkout-style clue unlock modal
+- Safe clue language designed to avoid stalking/surveillance claims
 
-## Monetization-first actions
+## Product safety rules
 
-- Extra Life — revive near the end of a Trial
-- Premium Roast Pack — better verdict copy and voice scripts
-- Royal Trial Skin — premium story-card visuals
-- Reward Gate — unlock winner reward after completing a Trial
+Use:
 
-## Safety and product language
-
-Use playful language:
-
-- loyalty score
-- Trial level
-- voice roast
-- Roast Verdict
-- Crown Council
-- Extra Life
-- winner reward
+- Shadow Cards
+- whispers
+- voluntary hints
+- deck aura
+- time clue
+- Insight Tokens
+- safe mystery clues
 
 Avoid:
 
 - hacking
-- identity matching
 - device fingerprinting
-- forced public shaming
-- private account access
-- adult/off-platform access
+- GPS tracking
+- carrier/network lookup claims
+- matching anonymous users to real contacts
+- forced unmasking
+- selling private accounts, phone numbers, or off-platform access
 
-This MVP is frontend-only. Supabase, Stripe, audio upload, and persistent reward gates can be added after the viral flow is validated.
+## Tech stack
+
+- React 19
+- Vite 6
+- TypeScript
+- Tailwind CSS v4
+- Lucide React
+- Native Web Audio API
 
 ## Local development
 
