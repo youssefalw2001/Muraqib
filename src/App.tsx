@@ -1,5 +1,5 @@
-import ArabGameApp from './ArabGameApp';
+import DiwanOfShadowsApp from './DiwanOfShadowsApp';
 
 export default function App() {
-  return <ArabGameApp />;
+  return <DiwanOfShadowsApp />;
 }
